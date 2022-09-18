@@ -20,6 +20,8 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
+Plug 'vim-test/vim-test'
+
 call plug#end()
 
 
@@ -39,7 +41,7 @@ require('lualine').setup()
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "typescript", "go", "javascript" },
+  ensure_installed = { "typescript", "go", "javascript", "ruby" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -100,7 +102,10 @@ nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities
 } 
-
+nvim_lsp.solargraph.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 local saga = require('lspsaga')
 saga.init_lsp_saga {
   error_sign = '',
@@ -113,7 +118,7 @@ saga.init_lsp_saga {
 END
 
 " Key mappings
-nnoremap <C-f> :Files<CR>
+nnoremap <C-f> :GitFiles<CR>
 nnoremap <C-\> :NERDTreeFocusToggle<CR>
 inoremap <C-Tab>   <C-\><C-N>:tabnext<CR>
 inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
