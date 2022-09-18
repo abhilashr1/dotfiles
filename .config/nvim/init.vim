@@ -1,7 +1,8 @@
 call plug#begin()
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
 Plug 'preservim/nerdtree'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -118,7 +119,8 @@ saga.init_lsp_saga {
 END
 
 " Key mappings
-nnoremap <C-f> :GitFiles<CR>
+nnoremap <C-f> <cmd>Telescope find_files<cr>
+nnoremap <C-s> <cmd>Telescope live_grep<cr>
 nnoremap <C-\> :NERDTreeFocusToggle<CR>
 inoremap <C-Tab>   <C-\><C-N>:tabnext<CR>
 inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
