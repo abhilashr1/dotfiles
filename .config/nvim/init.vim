@@ -22,6 +22,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
 Plug 'vim-test/vim-test'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -32,6 +33,11 @@ let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git -o -name di
 " Open NERDTree automatically in PWD
 let g:nerdtree_tabs_open_on_gui_startup=1
 let g:nerdtree_tabs_open_on_console_startup=1
+
+" Linting
+let g:ale_fixers={'javascript': ['prettier', 'eslint'], 'typescript': ['prettier', 'eslint']}
+let g:ale_fix_on_save=1
+
 
 " Open NERDTree in new tab
 autocmd BufWinEnter * NERDTreeMirrorOpen
@@ -71,7 +77,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
+  client.server_capabilities.documentFormattingProvider = true
+
 end
+
 local cmp = require('cmp')
   cmp.setup({
     snippet = {
@@ -106,14 +115,6 @@ nvim_lsp.tsserver.setup {
 nvim_lsp.solargraph.setup {
   on_attach = on_attach,
   capabilities = capabilities
-}
-local saga = require('lspsaga')
-saga.init_lsp_saga {
-  error_sign = '',
-  warn_sign = '',
-  hint_sign = '',
-  infor_sign = '',
-  border_style = "round"
 }
 
 END
