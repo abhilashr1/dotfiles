@@ -34,6 +34,9 @@ let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git -o -name di
 let g:nerdtree_tabs_open_on_gui_startup=1
 let g:nerdtree_tabs_open_on_console_startup=1
 
+" Yank to clipboard
+set clipboard+=unnamedplus
+
 " Linting
 let g:ale_fixers={'javascript': ['prettier', 'eslint'], 'typescript': ['prettier', 'eslint']}
 let g:ale_fix_on_save=1
