@@ -72,7 +72,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<C-r>', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<C-rr>', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<C-a>', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
@@ -125,7 +125,7 @@ nnoremap <C-s> <cmd>Telescope live_grep<cr>
 nnoremap <C-\> :NERDTreeFocusToggle<CR>
 inoremap <C-Tab>   <C-\><C-N>:tabnext<CR>
 inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
-
+map <leader>r :NERDTreeFind<cr>
 
 " Relative Line Numbers
 :set number relativenumber
