@@ -40,7 +40,8 @@ set clipboard+=unnamedplus
 " Linting
 let g:ale_fixers={'javascript': ['prettier', 'eslint'], 'typescript': ['prettier', 'eslint']}
 let g:ale_fix_on_save=1
-
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_javascript_eslint_use_global = 1
 
 " Open NERDTree in new tab
 autocmd BufWinEnter * NERDTreeMirrorOpen
@@ -130,6 +131,20 @@ inoremap <C-Tab>   <C-\><C-N>:tabnext<CR>
 inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
 map <leader>r :NERDTreeFind<cr>
 
+" Autofix entire buffer with eslint_d:
+nnoremap <leader>f mF:%!eslint_d --stdin --fix-to-stdout<CR>`F
+
 " Relative Line Numbers
 :set number relativenumber
 :set nu rnu
+
+set tabstop=2       " The width of a TAB is set to 4.
+                    " Still it is a \t. It is just that
+                    " Vim will interpret it to be having
+                    " a width of 4.
+
+set shiftwidth=2    " Indents will have a width of 4
+
+set softtabstop=2   " Sets the number of columns for a TAB
+
+set expandtab       " Expand TABs to spaces

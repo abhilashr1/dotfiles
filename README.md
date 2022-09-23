@@ -6,3 +6,4 @@ Things to do first
 2. Install ripgrep for symbol searching `brew install ripgrep`
 3. Install TypeScript language server `npm i -g typescript-language-server`
 4. Install sonargraph Ruby language server `gem install sonargraph`
+5. Install eslint_d npm package `npm i -g eslint_d`
