@@ -26,6 +26,7 @@ Plug 'dense-analysis/ale'
 
 Plug 'tpope/vim-fugitive'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'yamatsum/nvim-cursorline'
 
 call plug#end()
 
@@ -126,6 +127,19 @@ nvim_lsp.solargraph.setup {
   capabilities = capabilities
 }
 
+require('nvim-cursorline').setup {
+  cursorline = {
+    enable = true,
+    timeout = 1000,
+    number = false,
+  },
+  cursorword = {
+    enable = true,
+    min_length = 3,
+    hl = { underline = true },
+  }
+}
+
 END
 
 colorscheme nightfox
@@ -149,6 +163,9 @@ nnoremap <leader>b :G blame<CR>
 " Relative Line Numbers
 :set number relativenumber
 :set nu rnu
+
+" Cursor Line
+:set cursorline
 
 set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
