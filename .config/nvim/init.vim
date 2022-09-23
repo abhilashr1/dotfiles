@@ -24,6 +24,9 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'vim-test/vim-test'
 Plug 'dense-analysis/ale'
 
+Plug 'tpope/vim-fugitive'
+Plug 'EdenEast/nightfox.nvim'
+
 call plug#end()
 
 
@@ -36,6 +39,8 @@ let g:nerdtree_tabs_open_on_console_startup=1
 
 " Yank to clipboard
 set clipboard+=unnamedplus
+
+" Git blame
 
 " Linting
 let g:ale_fixers={'javascript': ['prettier', 'eslint'], 'typescript': ['prettier', 'eslint']}
@@ -123,6 +128,8 @@ nvim_lsp.solargraph.setup {
 
 END
 
+colorscheme nightfox
+
 " Key mappings
 nnoremap <C-f> <cmd>Telescope find_files<cr>
 nnoremap <C-s> <cmd>Telescope live_grep<cr>
@@ -131,8 +138,13 @@ inoremap <C-Tab>   <C-\><C-N>:tabnext<CR>
 inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
 map <leader>r :NERDTreeFind<cr>
 
+nnoremap <silent> g? <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
 " Autofix entire buffer with eslint_d:
 nnoremap <leader>f mF:%!eslint_d --stdin --fix-to-stdout<CR>`F
+
+" Git blame
+nnoremap <leader>b :G blame<CR>
 
 " Relative Line Numbers
 :set number relativenumber
