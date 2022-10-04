@@ -82,7 +82,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<C-rr>', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<C-a>', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
@@ -148,9 +148,17 @@ colorscheme nightfox
 nnoremap <C-f> <cmd>Telescope find_files<cr>
 nnoremap <C-s> <cmd>Telescope live_grep<cr>
 nnoremap <C-\> :NERDTreeFocusToggle<CR>
-inoremap <C-Tab>   <C-\><C-N>:tabnext<CR>
-inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
 map <leader>r :NERDTreeFind<cr>
+
+noremap <leader>1 1gt<cr>
+noremap <leader>2 2gt<cr>
+noremap <leader>3 3gt<cr>
+noremap <leader>4 4gt<cr>
+noremap <leader>5 5gt<cr>
+noremap <leader>6 6gt<cr>
+noremap <leader>7 7gt<cr>
+noremap <leader>8 8gt<cr>
+noremap <leader>9 9gt<cr>
 
 nnoremap <silent> g? <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
@@ -159,6 +167,10 @@ nnoremap <leader>f mF:%!eslint_d --stdin --fix-to-stdout<CR>`F
 
 " Git blame
 nnoremap <leader>b :G blame<CR>
+
+" Navigation
+nnoremap <C-d> 5j<CR>
+nnoremap <C-u> 5k<CR>
 
 " Relative Line Numbers
 :set number relativenumber
