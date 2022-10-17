@@ -28,6 +28,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'yamatsum/nvim-cursorline'
 
+Plug 'terrortylor/nvim-comment'
+
 call plug#end()
 
 
@@ -110,7 +112,7 @@ local cmp = require('cmp')
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
+      { name = 'vsnip' }, 
     }, {
       { name = 'buffer' },
     })
@@ -143,6 +145,8 @@ require('nvim-cursorline').setup {
     hl = { underline = true },
   }
 }
+
+require('nvim_comment').setup({comment_empty = false})
 
 END
 
@@ -193,3 +197,15 @@ set shiftwidth=2    " Indents will have a width of 4
 set softtabstop=2   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
+
+" Gofmt on save
+function! CustomGoFmt()
+  let file = expand('%')
+  silent execute "!gofmt -w " . file
+  edit!
+endfunction
+
+command! CustomGoFmt call CustomGoFmt()
+augroup go_autocmd
+  autocmd BufWritePost *.go CustomGoFmt
+augroup END
