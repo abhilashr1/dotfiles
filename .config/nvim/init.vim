@@ -30,6 +30,9 @@ Plug 'yamatsum/nvim-cursorline'
 
 Plug 'terrortylor/nvim-comment'
 
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'beauwilliams/focus.nvim'
 call plug#end()
 
 
@@ -210,6 +213,17 @@ keymap("n", "<leader>t", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
 -- close floaterm
 keymap("t", "<leader>t", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 
+--- Indent blank lines
+
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
+require("nvim-autopairs").setup {}
+require("focus").setup()
+
 END
 
 colorscheme nightfox
@@ -249,14 +263,14 @@ nnoremap <C-u> 5k<CR>
 " Cursor Line
 :set cursorline
 
-set tabstop=2       " The width of a TAB is set to 4.
+set tabstop=4       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
                     " a width of 4.
 
-set shiftwidth=2    " Indents will have a width of 4
+set shiftwidth=4    " Indents will have a width of 4
 
-set softtabstop=2   " Sets the number of columns for a TAB
+set softtabstop=4   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
 
