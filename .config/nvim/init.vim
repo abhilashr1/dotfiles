@@ -32,7 +32,7 @@ Plug 'terrortylor/nvim-comment'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'windwp/nvim-autopairs'
-Plug 'beauwilliams/focus.nvim'
+Plug 'webdevel/tabulous'
 call plug#end()
 
 
@@ -222,7 +222,6 @@ require("indent_blankline").setup {
 }
 
 require("nvim-autopairs").setup {}
-require("focus").setup()
 
 END
 
