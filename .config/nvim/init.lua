@@ -61,9 +61,6 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  -- Debugger
-  use 'mfussenegger/nvim-dap'
-
   -- File Explorer
   use { 'nvim-tree/nvim-tree.lua',
     requires = {
@@ -73,6 +70,51 @@ require('packer').startup(function(use)
 
   -- Tabs
   use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
+
+  -- Tests
+  use {
+    "vim-test/vim-test"
+  }
+
+  -- Dashboard
+  use {
+    'goolord/alpha-nvim',
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.dashboard'.config)
+    end
+  }
+
+  -- Screensaver
+  use {
+    "folke/drop.nvim",
+    event = "VimEnter",
+    config = function()
+      math.randomseed(os.time())
+      local theme = ({ "stars", "snow", "xmas" })[math.random(1, 3)]
+      require("drop").setup { theme = theme }
+    end,
+  }
+
+  -- Highlighter
+  use {
+    "RRethy/vim-illuminate",
+    event = "BufReadPost",
+    opts = { delay = 200 },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+    end,
+  }
+  use {
+    'm-demare/hlargs.nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
+  use {
+    'andymass/vim-matchup',
+    setup = function()
+      -- may set any options here
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end
+  }
 
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
@@ -407,9 +449,18 @@ local servers = {
   },
 }
 
+-- Tests Setup
+vim.g["test#strategy"] = "neovim"
+vim.g["test#neovim#start_normal"] = 1
+vim.keymap.set('n', '<leader>tf', ":TestFile<cr>")
+vim.keymap.set('n', '<leader>tn', ":TestNearest<cr>")
+
+-- Highlighter (Semantic)
+require('hlargs').setup()
+
 -- Setup neovim lua configuration
 require('neodev').setup()
---
+
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
