@@ -31,6 +31,19 @@ require('packer').startup(function(use)
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   }
 
+  -- Copilot
+  use {'github/copilot.vim', branch = 'release' }
+
+  -- Hints
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup()
+    end
+  }
+
   use { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     run = function()
@@ -176,6 +189,9 @@ vim.opt.termguicolors = true
 vim.o.mouse = 'a'
 
 -- Enable break indent
+vim.opt.autoindent = true
+vim.opt.autowrite = true
+vim.opt.tabstop = 4
 vim.o.breakindent = true
 vim.o.expandtab = true
 vim.o.cursorline = true
@@ -363,6 +379,10 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+-- Copilot setup
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-]>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 -- File Explorer
 require("nvim-tree").setup({
   hijack_netrw = true
@@ -442,9 +462,10 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
