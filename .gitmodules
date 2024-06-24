@@ -1,0 +1,6 @@
+[submodule "kitty/kitty-themes"]
+	path = kitty/kitty-themes
+	url = https://github.com/dexpota/kitty-themes.git
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/abhilashr1/nvim
