@@ -3,3 +3,5 @@ if status is-interactive
 end
 
 set -gx GOPATH $HOME/go
+
+alias n="nvim ."
